@@ -1,0 +1,12 @@
+Saved/Autosaves
+Saved/Collections
+Saved/Logs
+Saved/*.png
+
+*.sln
+*.xcworkspace
+
+DerivedDataCache
+Intermediate
+
+.vs
