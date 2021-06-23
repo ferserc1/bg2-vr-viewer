@@ -1,0 +1,31 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "4.24",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "Bg2VrViewer",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine",
+				"Bg2UnrealTools"
+			]
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "Bg2VrTools",
+			"Enabled": true
+		},
+		{
+			"Name": "Bg2UnrealTools",
+			"Enabled": true
+		},
+		{
+			"Name": "SunPosition",
+			"Enabled": true
+		}
+	]
+}
