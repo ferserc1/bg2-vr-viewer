@@ -26,31 +26,36 @@ void ABg2VrSceneLoader::LoadSceneAndAddFloor()
 	// collider present: add floor navigation at the collider position
 	// collider not present: add floor navigation
 	addFloorNavigation = true;
-	//for (TActorIterator<AActor> ActorItr(GetWorld()); ActorItr; ++ActorItr) {
-	//	{
-	//		TArray<UProceduralMeshComponent*> Meshes;
+	for (TActorIterator<AActor> ActorItr(GetWorld()); ActorItr; ++ActorItr) {
+		{
+			TArray<UProceduralMeshComponent*> Meshes;
 
 
-	//		AActor* Mesh = *ActorItr;
-	//		Mesh->GetComponents(Meshes);
+			AActor* Mesh = *ActorItr;
+			Mesh->GetComponents(Meshes);
 			
-	//		for (int i = 0; i < Meshes.Num(); ++i) {
-			
-				//Mesh->SetActorEnableCollision(false);
-				/*FString str1 = ActorItr->GetName();
-				auto ObjTeleportArea = NewObject<UTeleportAreaComponent>(Mesh);
-				ObjTeleportArea->RegisterComponent();
-				FVector extent;
-				FVector origin;
-				ActorItr->GetActorBounds(true, origin, extent);
-				ObjTeleportArea->SetBoxExtent(extent);*/
+			for (int i = 0; i < Meshes.Num(); ++i) {
+
+				auto mesh = Meshes[i];
+				FString str1 = mesh->GetName();
+				if (str1 == TEXT("bg2 engine mesh")) {
+					Mesh->SetActorEnableCollision(false);
+//					auto ObjTeleportArea = NewObject<UTeleportAreaComponent>(Mesh);
+//					ObjTeleportArea->RegisterComponent();
+//					FVector extent;
+//					FVector origin;
+//					ActorItr->GetActorBounds(true, origin, extent);
+//					ObjTeleportArea->SetBoxExtent(extent);
+//					GEngine->AddOnScreenDebugMessage(-1, 30.0f, FColor::Green, FString::Printf(TEXT("Collision added to %s"), *str1));
+				}
+				
 
 				//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("%s"), *str1));
 				//FString str2 = ActorItr->GetActorLocation().ToString();
 				//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("%s"), *str2));
-	//		}
-	//	}
-	//}
+			}
+		}
+	}
 
 	if (addFloorNavigation)
 	{
