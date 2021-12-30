@@ -33,20 +33,27 @@ void ABg2VrSceneLoader::LoadSceneAndAddFloor()
 
 			AActor* Mesh = *ActorItr;
 			Mesh->GetComponents(Meshes);
+			TArray<UBoxComponent*> Boxes;
+			Mesh->GetComponents(Boxes);
 			
 			for (int i = 0; i < Meshes.Num(); ++i) {
 
 				auto mesh = Meshes[i];
 				FString str1 = mesh->GetName();
 				if (str1 == TEXT("bg2 engine mesh")) {
-					Mesh->SetActorEnableCollision(false);
-//					auto ObjTeleportArea = NewObject<UTeleportAreaComponent>(Mesh);
-//					ObjTeleportArea->RegisterComponent();
-//					FVector extent;
-//					FVector origin;
-//					ActorItr->GetActorBounds(true, origin, extent);
-//					ObjTeleportArea->SetBoxExtent(extent);
-//					GEngine->AddOnScreenDebugMessage(-1, 30.0f, FColor::Green, FString::Printf(TEXT("Collision added to %s"), *str1));
+					
+					if (Boxes.Num() > 0)
+					{
+						UBoxComponent* box = Boxes[0];
+						FVector extent = box->GetScaledBoxExtent();
+						FVector origin = box->GetComponentLocation();
+						//auto ObjTeleportArea = NewObject<UTeleportAreaComponent>(Mesh);
+						//ObjTeleportArea->RegisterComponent();
+						DrawDebugBox(GetWorld(), origin, extent, FColor::Red, true);
+						//ObjTeleportArea->SetBoxExtent(extent);
+						// TODO: add a teleport area based on the mesh geometry. I don't know how to do it,
+						// it seems to be something absurdly complicated
+					}
 				}
 				
 
